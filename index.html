@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lumina Control</title>
+    <style>
+      body {
+        background-color: #f0f0f0;
+        font-family: "Segoe UI", system-ui, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        width: 90%;
+        max-width: 400px;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+
+      h1 {
+        margin: 0;
+        font-weight: 600;
+        font-size: 1.8rem;
+        color: #2c3e50;
+      }
+
+      .time-section {
+        margin-bottom: 1.5rem;
+      }
+
+      .time-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        font-size: 0.9rem;
+        color: #333;
+      }
+
+      .time-input {
+        width: 100%;
+        padding: 0.8rem;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        background: #f9f9f9;
+        color: #333;
+        font-size: 1rem;
+        outline: none;
+        transition: border-color 0.3s ease;
+      }
+
+      .time-input:focus {
+        border-color: #2980b9;
+        background: #fff;
+      }
+
+      .submit-btn {
+        width: 100%;
+        padding: 1rem;
+        border: none;
+        border-radius: 8px;
+        background: #2980b9;
+        color: white;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        margin-top: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .submit-btn:hover {
+        background: #2573a6;
+      }
+
+      .status-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1.5rem;
+        font-size: 0.8rem;
+        color: #888;
+      }
+
+      .status-indicator {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 0.5rem;
+        background: #f39c12;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          opacity: 0.5;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0.5;
+        }
+      }
+
+      .toast {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #2980b9;
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        transform: translateY(100px);
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+
+      .toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>LUMINA CONTROL</h1>
+      </div>
+
+      <div class="control-panel">
+        <form id="light-form" onsubmit="submitSchedule(); return false;">
+          <!-- Activation Button -->
+          <div class="time-section">
+            <label class="time-label" for="onTime">ACTIVATION</label>
+            <input type="time" id="onTime" name="onTime" required class="time-input" />
+          </div>
+      
+          <!-- Deactivation Button -->
+          <div class="time-section">
+            <label class="time-label" for="offTime">DEACTIVATION</label>
+            <input type="time" id="offTime" name="offTime" required class="time-input" />
+          </div>
+      
+          <!-- Confirm Schedule Button -->
+          <button type="submit" class="submit-btn">CONFIRM SCHEDULE</button>
+        </form>
+      </div>
+
+      <div class="status-bar">
+        <div class="status-indicator"></div>
+        <span id="statusText">SYNCING WITH DEVICE</span>
+      </div>
+    </div>
+
+    <div id="notification" class="toast">SCHEDULE CONFIGURATION SAVED</div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
